@@ -12,9 +12,9 @@ The best should be status is computed by a modified _logistical function_.
  - provide a webserver and a customizeable html page with a graph
  - it is based on the library chartkick and therefore on google charts 
    - it can be configured the same way as google charts can be.
-   - it runs completly in your clients browser. No data is sent to external servers ()
- - it computes the lgoistical function for you and provide a customizeable interface
- - it shows milestones or deadlines as vertical lines in your graph
+   - it runs completly in your clients browser. No data is sent to external servers (See https://developers.google.com/chart/interactive/docs/gallery/linechart bottom of page)
+ - it computes the logistic function for you and provide a customizeable interface
+ - ~~it shows milestones or deadlines as vertical lines in your graph~~ (not yet)
  
 ## What this program is not
 
@@ -61,7 +61,7 @@ The ERB file must have at least this content:
 
 ```
 
-The yaml file format can be taken from [conf/sample-data.yaml] and [conf/sample-config.yaml]. Always required is
+The yaml file format can be taken from (conf/sample-data.yaml) and (conf/sample-config.yaml). Always required is
 
  - an end date for the project
  - at least 1 label
