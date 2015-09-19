@@ -1,0 +1,54 @@
+
+---
+
+labels:
+  - open issues
+  - total issues
+  - testable issues
+
+entries:
+  - timestamp: 2015-10-01
+    values:
+      - 100
+      - 200
+      - 300
+  - timestamp: 2015-10-03
+    values:
+      - 120
+      - 220
+      - 320
+  - timestamp: 2015-10-04
+    values:
+      - 150
+      - 220
+      - 300
+  - timestamp: 2015-10-10
+    values:
+      - 180
+      - 250
+      - 300
+  - timestamp: 2015-10-12
+    values:
+      - 100
+      - 200
+      - 300
+  - timestamp: 2015-10-15
+    values:
+      - 100
+      - 200
+      - 300
+  - timestamp: 2015-10-19
+    values:
+      - 100
+      - 200
+      - 300
+  - timestamp: 2015-10-20
+    values:
+      - 100
+      - 200
+      - 300
+  - timestamp: 2015-10-25
+    values:
+      - 100
+      - 200
+      - 300

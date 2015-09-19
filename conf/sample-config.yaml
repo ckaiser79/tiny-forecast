@@ -1,0 +1,11 @@
+
+---
+
+end-date: 2015-11-01
+
+# growing index is different on different phases of a project
+# smaller values indicates faster progress
+factors:
+  - 0.5 0.8
+  - 0.7 1.0
+  - 1.1 1.5
