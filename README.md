@@ -61,7 +61,7 @@ The ERB file must have at least this content:
 
 ```
 
-The yaml file format can be taken from (conf/sample-data.yaml) and (conf/sample-config.yaml). Always required is
+The yaml file format can be taken from [sample-data.yaml](conf/sample-data.yaml) and [sample-config.yaml](conf/sample-config.yaml). Always required is
 
  - an end date for the project
  - at least 1 label
