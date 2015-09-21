@@ -33,6 +33,10 @@ module Sigma
       @yamlConfig['end-date']
     end
 
+    def startDate
+      @yamlConfig['start-date']
+    end	
+	
     private
 
     def loadChartData

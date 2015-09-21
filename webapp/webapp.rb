@@ -17,10 +17,6 @@ class ChartController
 
 end
 
-#
-# :startDate start date included yyyy-mm-dd
-# :endDate   ending date included yyyy-mm-dd
-#
 get '/charts/sigma/:id.html' do
 
   fileConfig = File.dirname(__FILE__) + '/../conf/' + params['id'] + '-config.yaml'
@@ -31,6 +27,7 @@ get '/charts/sigma/:id.html' do
   lines = loader.chartData
 
   sigma = Sigma::SigmaDateRangeFunction.new loader.endDate
+  sigma.startDate = loader.startDate
   sigma.addAllFactors loader.factors
   totalLines = sigma.run loader.maxY
 
