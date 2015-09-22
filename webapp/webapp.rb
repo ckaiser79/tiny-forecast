@@ -17,7 +17,7 @@ class ChartController
 
 end
 
-get '/charts/sigma/:id.html' do
+get '/charts/:id/sigma.html' do
 
   fileConfig = File.dirname(__FILE__) + '/../conf/' + params['id'] + '-config.yaml'
   fileData   = File.dirname(__FILE__) + '/../conf/' + params['id'] + '-data.yaml'
