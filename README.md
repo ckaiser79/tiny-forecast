@@ -36,6 +36,20 @@ Based on this libraries:
  - sinatra
  - chartkick
  - google charts
+ 
+# Startup
+
+Run in foreground
+
+```
+rackup
+```
+
+Run in background
+
+```
+rackup -D
+```
 
 ## Adding own reports
 
