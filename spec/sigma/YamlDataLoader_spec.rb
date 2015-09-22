@@ -29,6 +29,11 @@ describe Sigma::YamlDataLoader do
     @loader.run
     expect(@loader.maxY).to eq 320
   end
+  
+  it "reads template" do
+    @loader.run
+    expect(@loader.template).to eq :sample
+  end  
 
   it "reads correct values (date is date)" do
 

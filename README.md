@@ -43,7 +43,7 @@ To create a now project calls _my-awsome-project_, follow this steps:
 
  1. Add a file called `my-awsome-project-data.yaml` to directory `conf`.
  2. Add a file called `my-awsome-project-config.yaml` to directory `conf`.
- 3. Add a file called `my-awsome-project.erb` to directory `webapp/views`.
+ 3. Optionally add a file called `my-awsome-project.erb` to directory `webapp/views`.
 
 The ERB file must have at least this content:
 

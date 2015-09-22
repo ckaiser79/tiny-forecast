@@ -37,6 +37,13 @@ module Sigma
       @yamlConfig['start-date']
     end	
 	
+	def template
+		tpl = @yamlConfig['template']
+		tpl = 'sample' if tpl.nil?
+		
+		tpl.to_sym
+	end
+	
     private
 
     def loadChartData

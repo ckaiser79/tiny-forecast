@@ -39,6 +39,6 @@ get '/charts/sigma/:id.html' do
   h =  { :name => 'best-expected-line', :data => totalLines }
   controller.lines.push h
 
-  erb params['id'].to_sym, :locals => { :d => controller }
+  erb loader.template, :locals => { :d => controller }
 end
 
