@@ -17,13 +17,15 @@ class ChartController
 
 end
 
-get '/charts/:id/sigma.html' do
-
-  fileConfig = File.dirname(__FILE__) + '/../conf/' + params['id'] + '-config.yaml'
-  fileData   = File.dirname(__FILE__) + '/../conf/' + params['id'] + '-data.yaml'
+def createLoader id
+  fileConfig = File.dirname(__FILE__) + '/../conf/' + id + '-config.yaml'
+  fileData   = File.dirname(__FILE__) + '/../conf/' + id + '-data.yaml'
   loader = Sigma::YamlDataLoader.new fileConfig, fileData
-
   loader.run
+  loader
+end
+
+def loadSigmaChart controller, loader, params
   lines = loader.chartData
 
   sigma = Sigma::SigmaDateRangeFunction.new loader.endDate
@@ -31,14 +33,26 @@ get '/charts/:id/sigma.html' do
   sigma.addAllFactors loader.factors
   totalLines = sigma.run loader.maxY
 
-
-  controller = ChartController.new
   controller.lines = lines
-  controller.title = params['id']
 
   h =  { :name => 'best-expected-line', :data => totalLines }
   controller.lines.push h
-
-  erb loader.template, :locals => { :d => controller }
 end
 
+get '/charts/:id/:file.html' do
+  file = params['file']
+  loader = createLoader params['id']
+  
+  controller = ChartController.new  
+  controller.title = params['id']
+  
+  loadSigmaChart(controller, loader, params) if file == 'sigma'
+    
+  template = loader.template + '-' + file
+  layout = loader.template + '-layout'
+  erb template.to_sym, :layout => layout.to_sym, :locals => { :d => controller }
+end
+
+get '/charts/:id/' do
+	redirect to('/charts/' + params['id'] + '/index.html')
+end

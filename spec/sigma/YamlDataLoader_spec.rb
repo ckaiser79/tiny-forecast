@@ -32,7 +32,7 @@ describe Sigma::YamlDataLoader do
   
   it "reads template" do
     @loader.run
-    expect(@loader.template).to eq :sample
+    expect(@loader.template).to eq 'sample'
   end  
 
   it "reads correct values (date is date)" do

@@ -41,7 +41,7 @@ module Sigma
 		tpl = @yamlConfig['template']
 		tpl = 'sample' if tpl.nil?
 		
-		tpl.to_sym
+		tpl
 	end
 	
     private
