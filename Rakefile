@@ -8,7 +8,8 @@ task :default => [:run]
 
 desc "run app locally"
 task :run => "Gemfile.lock" do
-  system 'ruby -I lib webapp/webapp.rb'
+  require './webapp/webapp'
+  ChartsWebapp.run!
 end
 
 RSpec::Core::RakeTask.new(:spec) do |t|

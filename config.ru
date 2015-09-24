@@ -6,4 +6,4 @@ $:.unshift File.dirname(__FILE__) + '/webapp'
 require 'rubygems'
 require 'webapp'
 
-run Sinatra::Application
+run ChartsWebapp.new
