@@ -1,4 +1,4 @@
-#\ -w -p 8080
+#\ -w -p 8080 -o 0.0.0.0
 
 $:.unshift File.dirname(__FILE__) + '/lib'
 $:.unshift File.dirname(__FILE__) + '/webapp'
