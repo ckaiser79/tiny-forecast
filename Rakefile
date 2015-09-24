@@ -18,9 +18,24 @@ end
 
 task :package do
 
-	FileUtils.mkdir_p 'pkg'
-	filename = NAME + "-" + VERSION + ".tgz"
-	`tar czf pkg/#{filename} lib conf doc webapp config.ru Gemfile LICENSE Rakefile *.md *.gemspec`
-	throw "Unable to create package pkg/" + filename if $?.to_i > 0 
-	puts "created package pkg/"+ filename
+	includedFiles = []
+	includedFiles.push 'lib' 
+	includedFiles.push 'conf' 
+	includedFiles.push 'doc' 
+	includedFiles.push 'webapp' 
+	includedFiles.push 'config.ru'
+	includedFiles.push NAME + '.gemspec'
+	includedFiles.push 'Gemfile'
+	includedFiles.push 'LICENSE'
+	includedFiles.push 'Rakefile'
+	includedFiles.push 'README.md'
+	
+	filename = NAME + "-" + VERSION 
+	FileUtils.mkdir_p 'pkg/' + filename
+	FileUtils.cp_r includedFiles, 'pkg/' + filename + '/'
+	
+	`tar czf pkg/#{filename}.tgz -C pkg  #{filename}`
+	throw "Unable to create package pkg/" + filename + ".tgz" if $?.to_i > 0 
+	puts "created package pkg/"+ filename + ".tgz"
+	
 end
