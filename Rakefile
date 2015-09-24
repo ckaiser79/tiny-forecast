@@ -19,6 +19,8 @@ end
 task :package do
 
 	FileUtils.mkdir_p 'pkg'
-	`tar czf pkg/#{NAME}-#{VERSION}.tgz lib conf doc webapp config.ru Gemfile LICENSE Rakefile *.md *.gemspec`
-
+	filename = NAME + "-" + VERSION + ".tgz"
+	`tar czf pkg/#{filename} lib conf doc webapp config.ru Gemfile LICENSE Rakefile *.md *.gemspec`
+	throw "Unable to create package pkg/" + filename if $?.to_i > 0 
+	puts "created package pkg/"+ filename
 end
