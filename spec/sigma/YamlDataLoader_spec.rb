@@ -33,13 +33,22 @@ describe Sigma::YamlDataLoader do
   it "reads template" do
     @loader.run
     expect(@loader.template).to eq 'sample'
-  end  
+  end
+
+  it "reads keys and labels" do
+    @loader.run
+    expect(@loader.template).to eq 'sample'
+  end
 
   it "reads correct values (date is date)" do
 
     @loader.run
     result = @loader.chartData
     date = Date.parse('2015-10-01')
+
+    expect(result[0][:name]).to eq 'open issues'
+    expect(result[1][:name]).to eq 'total issues'
+    expect(result[2][:name]).to eq 'testable issues'
 
     expect(result[0][:name]).to eq 'open issues'
     expect(result[1][:name]).to eq 'total issues'

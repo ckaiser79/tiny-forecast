@@ -53,13 +53,25 @@ module Sigma
       data = @yamlData
       store = Hash.new
 
+      regexp = /\s*([^\[]+)\s+\[\s*([^\]]+)\s*\]/
+
       for j in 0..data['entries'].length - 1
 
         entry = data['entries'][j]
 
         for k in 0..data['labels'].length - 1
 
-          label = data['labels'][k]
+          label = []
+          matchdata = regexp.match data['labels'][k]
+
+          if matchdata.nil?
+            label[0] = data['labels'][k]
+            label[1] = data['labels'][k]
+          else
+            label[0] = matchdata[2]
+            label[1] = matchdata[1]
+          end
+
           values = store[label]
 
           if values.nil?
@@ -77,7 +89,7 @@ module Sigma
       end
 
       store.each do |k, v|
-        r = {:name => k, :data => v}
+        r = {:name => k[1], :data => v}
         @chartData.push r
       end
     end

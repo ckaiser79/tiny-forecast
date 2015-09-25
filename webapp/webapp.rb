@@ -38,13 +38,12 @@ class ChartsWebapp < Sinatra::Base
 
 	def loadSigmaChart controller, loader, params
 	  lines = loader.chartData
+    controller.lines = lines
 
-	  sigma = Sigma::SigmaDateRangeFunction.new loader.endDate
-	  sigma.startDate = loader.startDate
-	  sigma.addAllFactors loader.factors
-	  totalLines = sigma.run loader.maxY
-
-	  controller.lines = lines
+    sigma = Sigma::SigmaDateRangeFunction.new loader.endDate
+    sigma.startDate = loader.startDate
+    sigma.addAllFactors loader.factors
+    totalLines = sigma.run loader.maxY
 
 	  h =  { :name => 'best-expected-line', :data => totalLines }
 	  controller.lines.push h

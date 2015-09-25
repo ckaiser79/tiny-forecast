@@ -1,10 +1,13 @@
 
 ---
 
+#
+# label [technical-key for mapping values in entries]
+#
 labels:
-  - open issues
+  - open issues [open-issues]
   - total issues
-  - testable issues
+  - testable issues [testable-issues]
 
 entries:
   - timestamp: 2015-10-01
