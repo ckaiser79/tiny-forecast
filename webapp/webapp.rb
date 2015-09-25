@@ -45,7 +45,7 @@ class ChartsWebapp < Sinatra::Base
     sigma.addAllFactors loader.factors
     totalLines = sigma.run loader.maxY
 
-	  h =  { :name => 'best-expected-line', :data => totalLines }
+	  h =  { :name => 'validation line', :data => totalLines }
 	  controller.lines.push h
 	end
 
