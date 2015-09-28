@@ -2,6 +2,8 @@ require 'sigma'
 
 describe Sigma::YamlDataLoader do
 
+  CHART_ID = 'sigma'
+
   before :each do
     config = File.dirname(__FILE__) + '/sample-config.yaml'
     data   = File.dirname(__FILE__) + '/sample-data.yaml'
@@ -10,7 +12,7 @@ describe Sigma::YamlDataLoader do
 
   it "reads a yaml file by absolute path" do
 
-    @loader.run
+    @loader.run CHART_ID
     result = @loader.chartData
 
     expect(result.nil?).to be false
@@ -18,7 +20,7 @@ describe Sigma::YamlDataLoader do
   end
 
   it "reads factors" do
-    @loader.run
+    @loader.run CHART_ID
     factors = @loader.factors
     expect(factors.length).to eq 3
     expect(factors[0]).to eq [0.5, 0.8]
@@ -26,23 +28,23 @@ describe Sigma::YamlDataLoader do
   end
 
   it "reads maxY value" do
-    @loader.run
+    @loader.run CHART_ID
     expect(@loader.maxY).to eq 320
   end
   
   it "reads template" do
-    @loader.run
+    @loader.run CHART_ID
     expect(@loader.template).to eq 'sample'
   end
 
   it "reads keys and labels" do
-    @loader.run
+    @loader.run CHART_ID
     expect(@loader.template).to eq 'sample'
   end
 
   it "reads correct values (date is date)" do
 
-    @loader.run
+    @loader.run CHART_ID
     result = @loader.chartData
     date = Date.parse('2015-10-01')
 

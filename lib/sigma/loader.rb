@@ -12,11 +12,11 @@ module Sigma
     def initialize configFileName, dataFileName
 
       @yamlConfig = YAML.load_file configFileName
-      @yamlData   = YAML.load_file dataFileName
+      @yamlData = YAML.load_file dataFileName
       @maxY
     end
 
-    def run
+    def run chartId
       #
       # e.g.[
       #       { name: 'open-items' , data: [[x1, y1_1], [x2, y1_2]] },
@@ -24,7 +24,7 @@ module Sigma
       #     ]
       #
 
-      loadChartData
+      loadChartData chartId
       loadFactors
 
     end
@@ -35,18 +35,18 @@ module Sigma
 
     def startDate
       @yamlConfig['start-date']
-    end	
-	
-	def template
-		tpl = @yamlConfig['template']
-		tpl = 'sample' if tpl.nil?
-		
-		tpl
-	end
-	
+    end
+
+    def template
+      tpl = @yamlConfig['template']
+      tpl = 'sample' if tpl.nil?
+
+      tpl
+    end
+
     private
 
-    def loadChartData
+    def loadChartData chartId
       @maxY = -1
       @chartData = []
 
@@ -72,18 +72,21 @@ module Sigma
             label[1] = matchdata[1]
           end
 
-          values = store[label]
+          if lineIncluded? chartId, label[0]
+            values = store[label]
 
-          if values.nil?
-            values = Array.new
-            store[label] = values
+            if values.nil?
+              values = Array.new
+              store[label] = values
+            end
+
+            if @maxY < entry['values'][k]
+              @maxY = entry['values'][k]
+            end
+
+            values.push [entry['timestamp'], entry['values'][k]]
           end
 
-          if @maxY < entry['values'][k]
-            @maxY = entry['values'][k]
-          end
-
-          values.push [entry['timestamp'], entry['values'][k]]
         end
 
       end
@@ -101,9 +104,22 @@ module Sigma
       if not factors.nil?
         factors.each do |item|
           factorDefinition = item.split(/\s+/)
-          @factors.push [ factorDefinition[0].to_f, factorDefinition[1].to_f ]
+          @factors.push [factorDefinition[0].to_f, factorDefinition[1].to_f]
         end
       end
+    end
+
+    def lineIncluded? chartId, key
+
+      config = @yamlConfig['charts-' + chartId]
+      result = true
+
+      if not config.nil?
+        array = config['included-data']
+        result = array.include? key
+      end
+
+      result
     end
 
   end

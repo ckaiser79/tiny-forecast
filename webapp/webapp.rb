@@ -28,11 +28,11 @@ class ChartsWebapp < Sinatra::Base
 		@confDir = File.dirname(__FILE__) + '/../conf/' if @confDir.nil?
 	end
 
-	def createLoader id
+	def createLoader id, fileId
 	  fileConfig = @confDir + '/' + id + '-config.yaml'
 	  fileData   = @confDir + '/' + id + '-data.yaml'
 	  loader = Sigma::YamlDataLoader.new fileConfig, fileData
-	  loader.run
+	  loader.run fileId
 	  loader
 	end
 
@@ -43,6 +43,8 @@ class ChartsWebapp < Sinatra::Base
     sigma = Sigma::SigmaDateRangeFunction.new loader.endDate
     sigma.startDate = loader.startDate
     sigma.addAllFactors loader.factors
+
+
     totalLines = sigma.run loader.maxY
 
 	  h =  { :name => 'validation line', :data => totalLines }
@@ -51,7 +53,7 @@ class ChartsWebapp < Sinatra::Base
 
 	get '/charts/:id/:file.html' do
 	  file = params['file']
-	  loader = createLoader params['id']
+	  loader = createLoader params['id'], file
 	  
 	  controller = ChartController.new  
 	  controller.title = params['id']

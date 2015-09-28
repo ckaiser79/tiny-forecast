@@ -3,6 +3,16 @@
 
 end-date: 2015-11-01
 
+#
+# configure content of chart sigma explicitly
+# optional
+#
+charts-sigma:
+  included-data:
+    - open-issues
+    - total issues
+
+
 # growing index is different on different phases of a project
 # smaller values indicates faster progress
 factors:
