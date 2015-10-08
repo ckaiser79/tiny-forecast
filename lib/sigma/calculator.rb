@@ -4,6 +4,7 @@ module Sigma
 
     attr_reader :endDate
     attr_accessor :startDate
+    attr_writer :milestones
 
     def initialize endDate
       @endDate = endDate
@@ -66,6 +67,9 @@ module Sigma
         item = Array.new
         item[0] = xDate
         item[1] = y.to_i
+        item[2] = nil
+
+        attachOptionalMilestone item
 
         result.push item
 
@@ -75,6 +79,19 @@ module Sigma
     end
 
     private
+
+    def attachOptionalMilestone item
+      return if @milestones.nil?
+
+      date = item[0]
+
+      @milestones.each do |ms|
+        if ms['date'] == date
+          item[2] = ms['label']
+          return
+        end
+      end
+    end
 
     def factor x, maxX
 

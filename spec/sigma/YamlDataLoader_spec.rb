@@ -42,6 +42,19 @@ describe Sigma::YamlDataLoader do
     expect(@loader.template).to eq 'sample'
   end
 
+  it "reads milestones" do
+    @loader.run CHART_ID
+    milestones = @loader.milestones
+
+    expect(milestones.size).to eq 2
+
+    expect(milestones[0]['label']).to eq 'Code Freeze'
+    expect(milestones[0]['date']).to eq Date.parse('2015-10-15')
+
+    expect(milestones[1]['label']).to eq 'GO Life'
+    expect(milestones[1]['date']).to eq Date.parse('2015-11-01')
+  end
+
   it "reads correct values (date is date)" do
 
     @loader.run CHART_ID

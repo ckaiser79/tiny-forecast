@@ -3,6 +3,12 @@
 
 end-date: 2015-11-01
 
+milestones:
+  - date: 2015-10-15
+    label: Code Freeze
+  - date: 2015-11-01
+    label: GO Life
+
 #
 # configure content of chart sigma explicitly
 # optional

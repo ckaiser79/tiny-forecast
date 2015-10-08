@@ -19,6 +19,19 @@ describe Sigma::SigmaDateRangeFunction do
     expect(values[values.length - 1][1]).to be >= 31
   end
 
+  it "honors milestones" do
+    @sigma.milestones = [
+        { 'date' => Date.today + 10, 'label' => 'foo' },
+        { 'date' => Date.today + 20, 'label' => 'bar' }
+    ]
+    values = @sigma.run 320
+
+    expect(values[10][2]).to eq 'foo'
+    expect(values[20][2]).to eq 'bar'
+    expect(values[11].size).to eq 3
+    expect(values[10].size).to eq 3
+  end
+
   it "calculates some values" do
 
     values = @sigma.run 320

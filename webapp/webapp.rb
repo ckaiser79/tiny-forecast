@@ -43,11 +43,11 @@ class ChartsWebapp < Sinatra::Base
     sigma = Sigma::SigmaDateRangeFunction.new loader.endDate
     sigma.startDate = loader.startDate
     sigma.addAllFactors loader.factors
-
+    sigma.milestones = loader.milestones
 
     totalLines = sigma.run loader.maxY
 
-	  h =  { :name => 'validation line', :data => totalLines }
+	  h =  { :name => 'validation line', :data => totalLines, :types => [ :annotation ] }
 	  controller.lines.push h
 	end
 
