@@ -6,7 +6,8 @@ end-date: 2015-11-01
 
 milestones:
   - date: 2015-10-15
-    label: Code Freeze
+    style: 'point { visible: true; size: 18; shape-type: star; fill-color: #a52714 }'
+    label: Test Starts
   - date: 2015-11-01
     label: GO Life
 

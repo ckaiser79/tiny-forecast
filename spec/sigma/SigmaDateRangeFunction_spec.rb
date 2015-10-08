@@ -28,8 +28,8 @@ describe Sigma::SigmaDateRangeFunction do
 
     expect(values[10][2]).to eq 'foo'
     expect(values[20][2]).to eq 'bar'
-    expect(values[11].size).to eq 3
-    expect(values[10].size).to eq 3
+    expect(values[11].size).to eq 4
+    expect(values[10].size).to eq 4
   end
 
   it "calculates some values" do

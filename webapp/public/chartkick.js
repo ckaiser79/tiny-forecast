@@ -585,7 +585,7 @@
                           rows[key] = new Array(series.length);
                       }
 
-                      rows[key][i + k + 1] = d[2];
+                      rows[key][i + k + 1] = d[k + 2];
                   }
               }
           }
@@ -810,7 +810,13 @@
         r.push([key, toFloat(data[j][1])]);
       }
       else {
-        r.push([key, toFloat(data[j][1]), data[j][2]]);
+        var arr = [key, toFloat(data[j][1])];
+        var options = data[j].slice(2);
+
+        if (options.length > 0) {
+          arr = arr.concat(options);
+        }
+        r.push(arr);
       }
     }
     if (keyType === "datetime") {

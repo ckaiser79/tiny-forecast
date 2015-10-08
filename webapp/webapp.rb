@@ -47,7 +47,7 @@ class ChartsWebapp < Sinatra::Base
 
     totalLines = sigma.run loader.maxY
 
-	  h =  { :name => 'validation line', :data => totalLines, :types => [ :annotation ] }
+	  h =  { :name => 'validation line', :data => totalLines, :types => [ :annotation, :style ] }
 	  controller.lines.push h
 	end
 

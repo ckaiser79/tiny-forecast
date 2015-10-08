@@ -68,6 +68,7 @@ module Sigma
         item[0] = xDate
         item[1] = y.to_i
         item[2] = nil
+        item[3] = nil
 
         attachOptionalMilestone item
 
@@ -88,6 +89,7 @@ module Sigma
       @milestones.each do |ms|
         if ms['date'] == date
           item[2] = ms['label']
+          item[3] = ms['style']
           return
         end
       end
