@@ -2,3 +2,4 @@
 .idea
 *iml
 pkg
+bin/*yaml
