@@ -31,11 +31,11 @@ date (yyyy-mm-dd) \\t <number>+
 
 EOD
 
-      opts.on("-i", "--in TAB", "tab input file") do |v|
+      opts.on("-i", "--in TAB", "tab input file, '-' for <STDIN>") do |v|
         @options[:tab] = v
       end
 
-      opts.on("-o", "--out YAML", "yaml output file") do |v|
+      opts.on("-o", "--out YAML", "yaml output file, '-' for <STDOUT>") do |v|
         @options[:yaml] = v
       end
 
@@ -58,13 +58,31 @@ EOD
 
   def run
 
-    tab = CSV.read @options[:tab], { :col_sep => "\t" }
+    if @options[:tab] == '-'
+
+      tab = Array.new
+
+      ARGF.each do |line|
+        a = Array.new
+
+        line.split(/\t/).each do |r|
+          r = r.chomp
+          a.push r
+        end
+
+        tab.push a
+      end
+
+    else
+      tab = CSV.read @options[:tab], {:col_sep => "\t"}
+    end
+
     yaml = YAML.load '--- entries'
 
     entries = []
 
     tab.each do |line|
-
+      
       date = Date.parse line[0]
 
       entry = {}
@@ -79,11 +97,15 @@ EOD
 
     end
 
-    e = { 'entries' => entries }
+    e = {'entries' => entries}
     yaml = e.to_yaml
 
-    File.open(@options[:yaml], 'w') do |f|
-      f.write yaml
+    if @options[:yaml]
+      puts yaml
+    else
+      File.open(@options[:yaml], 'w') do |f|
+        f.write yaml
+      end
     end
 
   end
